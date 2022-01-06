@@ -5,6 +5,8 @@ use App\Http\Controllers\pageController;
 use App\Http\Controllers\indexController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryTypesController;
+use App\Http\Controllers\PostController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +26,10 @@ Route::get('/', [indexController::class, 'findAll'] )->name('index');
 Route::get('article/{id}', [ArticleController::class, 'findId'])->name('article');
 
 Route::get('post', [CategoryTypesController::class, 'findAll'])->name('post');
+
+Route::get('add', [PostController::class, 'add']);
+
+
 
 Route::get('about', function(){
     return view('blog.about');

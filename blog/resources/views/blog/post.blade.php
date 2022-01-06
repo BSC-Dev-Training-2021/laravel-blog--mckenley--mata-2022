@@ -15,19 +15,33 @@
                     </header>
                     <!-- Post content-->
                     <section class="mb-5">
-                        <form action="{{ route('post') }}" method="get" enctype="multipart/form-data">
+                        @if(Session::get('success'))
+                            <div class="alert alert-success">
+                                    {{ Session::get('success') }}
+                            </div>
+                        @endif
+                        @if(Session::get('fail'))
+                            <div class="alert alert-success">
+                                    {{ Session::get('fail') }}
+                            </div>
+                        @endif
+                        <form action="add" method="get" enctype="multipart/form-data">
                             @csrf
                                     <div class="form-group">
+                                        <input type="hidden" name="user" value="1">
                                         <label for="exampleFormControlTextarea1" class="mb-1">Title</label>
-                                        <input type="text" class="form-control mb-1" name="title" required>
+                                        <input type="text" class="form-control mb-1" name="title" required >
+                                        <span style="color:red">@error('title') {{$message}} @enderror</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" class="mb-1">Description</label>
-                                        <textarea class="form-control mb-1" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                                        <textarea class="form-control mb-1" id="exampleFormControlTextarea1" rows="3" name="description" required></textarea>
+                                        <span style="color:red">@error('description') {{$message}} @enderror</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1" class="mb-1">Content</label>
-                                        <textarea class="form-control mb-1" id="exampleFormControlTextarea1" rows="5" name="content"></textarea>
+                                        <textarea class="form-control mb-1" id="exampleFormControlTextarea1" rows="5" name="content" required></textarea>
+                                        <span style="color:red">@error('content') {{$message}} @enderror</span>
                                     </div>
                                     <div class="form-group">
                                         
@@ -43,15 +57,17 @@
                                                
                                             <div class="col-lg-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="{{ $value->id }}" id="checkbox" name="{{ $value->name }}">
-                                                    <label class="form-check-label" >
-                                                        {{ $value->name }}
+                                                    <input class="form-check-input" type="checkbox" value="{{ $value->id }}" id="checkbox{{$value->id}}" name="checkbox[]">
+
+                                                    <label class="form-check-label" for="checkbox{{$value->id}}">
+                                                      {{ $value->name }}
                                                     </label>
                                                 </div>  
                                             </div>
                                             @endforeach
                                         </div>
                                     </div>
+
                                     <button type="submit" class="btn btn-primary mt-5" name="submit">Post</button>
                                 </form>
                     </section>
