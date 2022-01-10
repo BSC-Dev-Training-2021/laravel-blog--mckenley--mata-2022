@@ -14,7 +14,7 @@
                     </header>
                     <!-- Post content-->
                     <div class="card mb-4">
-                        <form method="post" action="category.php">
+                        <form method="post" action="{{route('category') }}">
                             <div class="input-group">
                                 <input class="form-control" type="text" placeholder="Insert your category here." aria-label="Enter search term..." aria-describedby="button-search" name="add_cat" required  />
                                 <button class="btn btn-primary" id="button-search" type="submit" name="btn_add_cat">Add Category</button>
@@ -28,13 +28,11 @@
                             <div class="card-body">
                                 <form method="get">
                                     @foreach($cat_types as $values)
-                                    <li class="list-group-item">
-                                        
-                                            {{ $values->name }}
-                                            <input type="hidden" name="cat_id" value="{{ $values->id }}">
-                                            <button type="submit" class="btn btn-warning float-right" name="update-btn">Update</button>
-                                            <button type="submit" class="btn btn-danger float-right" name="btn-delete">Delete</button>
-                                        
+                                    <li class="list-group-item">                                       
+                                        {{ $values->name }}
+                                        <input type="hidden" name="cat_id" value="{{ $values->id }}">
+                                        <button type="submit" class="btn btn-warning float-right" name="update-btn">Update</button>
+                                        <button type="submit" class="btn btn-danger float-right" name="btn-delete">Delete</button>
                                     </li>
                                     @endforeach
                                 </form>  

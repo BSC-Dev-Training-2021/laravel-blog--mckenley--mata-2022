@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Http\Models\PostModel;
+use App\Http\Models\CategoryTypesModel;
 use Illuminate\Support\Facades\DB;
 class PostController extends Controller
 {
-	function post(){
+	public function post(){
 		return view('blog.post');
 	}
 
-    function add(Request $request){
+    public function add(Request $request){
     	$request->validate([
     		'title' => 'required',
     		'description' => 'required',
@@ -21,33 +23,35 @@ class PostController extends Controller
     	if($request->hasFile('image')){
 		    $image = $request->file('image');
 		    $image_name = $image->getClientOriginalName();
-		    $image->move(public_path('/image'),$image_name);
+		    $imagename = $image_name;
+		    $image->move(public_path('/image'),$imagename);
 
-		    $image_path = "/image/" . $image_name;
+		    $image_path = "/image/" . $imagename;
 		}
 
     	$blog_post_query = DB::table('blog_post')->insert([
     		'title' => $request->input('title'),
     		'description' => $request->input('description'),
     		'content' => $request->input('content'),
-    		'img_link' => $request->input('file'),
+    		'img_link' => $image_path,
     		'created_by' => 1
-
     	]);
-    	
 
+    	$category = $request->input('cb_category');
 
-
-
-    	
+    	if (isset($blog_post_query)){
+    		foreach($category as $values){
+    			DB::table('blog_post_categories')->insert([
+    				'category_id' => $values,
+    				'blog_post_id' => $blog_post_query->id
+    			]);
+    		}
+    	}
 
     	if($blog_post_query){
     		return back()->with('success','Data have been save');
     	}else{
     		return back()->with('fail', 'Something went wrong');
     	}
-
-
-
     }
 }

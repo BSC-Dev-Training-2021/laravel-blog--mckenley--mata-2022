@@ -33,10 +33,6 @@ Route::get('add', [PostController::class, 'add']);
 
 
 
-
-
-
-
 Route::get('category', function(){
     return view('blog.category');
 })->name('category');
