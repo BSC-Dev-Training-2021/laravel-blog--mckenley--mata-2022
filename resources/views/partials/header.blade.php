@@ -9,6 +9,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('post') }}">Post</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('category') }}">Category</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('message') }}"><i class="fa fa-envelope-o"></i></a></li>
             </ul>
         </div>

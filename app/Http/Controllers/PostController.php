@@ -18,16 +18,23 @@ class PostController extends Controller
     		'content' => 'required'
     	]);
 
+    	if($request->hasFile('image')){
+		    $image = $request->file('image');
+		    $image_name = $image->getClientOriginalName();
+		    $image->move(public_path('/image'),$image_name);
 
+		    $image_path = "/image/" . $image_name;
+		}
 
     	$blog_post_query = DB::table('blog_post')->insert([
     		'title' => $request->input('title'),
     		'description' => $request->input('description'),
     		'content' => $request->input('content'),
-    		'img_link' => $image_path,
+    		'img_link' => $request->input('file'),
     		'created_by' => 1
 
     	]);
+    	
 
 
 

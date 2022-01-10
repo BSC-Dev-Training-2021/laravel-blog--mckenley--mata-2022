@@ -29,7 +29,9 @@ Route::get('post', [CategoryTypesController::class, 'findAll'])->name('post');
 
 Route::get('add', [PostController::class, 'add']);
 
-
+Route::get('category', function(){
+    return view('blog.category');
+})->name('category');
 
 Route::get('about', function(){
     return view('blog.about');

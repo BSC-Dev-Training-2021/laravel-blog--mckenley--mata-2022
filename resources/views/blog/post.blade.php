@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="form-group">
                                         
-                                            <input class="form-control mb-1" type="file" name="file" id="file" accept="image/x-png,image/gif,image/jpeg" >
+                                            <input class="form-control mb-1" type="file" name="image" id="file" accept="image/x-png,image/gif,image/jpeg" >
                                             
                                     </div>
                                     <div class="form-group">
