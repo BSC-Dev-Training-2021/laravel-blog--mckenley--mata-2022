@@ -11,7 +11,8 @@ class CategoryTypesController extends Controller
     {
         $category_types = CategoryTypesModel::all();
         return view('blog.post', ['category_types' => $category_types]);
-        return view('partials.widgets', ['category_types' => $category_types]);
+        return view('blog.category', ['category_types' => $category_types])
     }
+    
     
 }

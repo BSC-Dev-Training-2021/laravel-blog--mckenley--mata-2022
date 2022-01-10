@@ -6,6 +6,7 @@ use App\Http\Controllers\indexController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryTypesController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\WidgetsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +22,20 @@ use App\Http\Controllers\PostController;
 
 
 
-Route::get('/', [indexController::class, 'findAll'] )->name('index');
+Route::get('/', [indexController::class, 'findAll_blogpost'] )->name('index');
 
 Route::get('article/{id}', [ArticleController::class, 'findId'])->name('article');
 
 Route::get('post', [CategoryTypesController::class, 'findAll'])->name('post');
 
 Route::get('add', [PostController::class, 'add']);
+
+
+
+
+
+
+
 
 Route::get('category', function(){
     return view('blog.category');

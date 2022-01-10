@@ -27,12 +27,16 @@
                             
                             <div class="card-body">
                                 <form method="get">
+                                    @foreach($cat_types as $values)
                                     <li class="list-group-item">
                                         
-                                            <input type="hidden" name="cat_id" value="">
+                                            {{ $values->name }}
+                                            <input type="hidden" name="cat_id" value="{{ $values->id }}">
                                             <button type="submit" class="btn btn-warning float-right" name="update-btn">Update</button>
                                             <button type="submit" class="btn btn-danger float-right" name="btn-delete">Delete</button>
+                                        
                                     </li>
+                                    @endforeach
                                 </form>  
                             </div>
                             

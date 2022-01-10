@@ -75,4 +75,5 @@
                 <div class="col-lg-4"></div>
             </div>
         </div>
+       @include('partials.widgets', ['category_types' => $category_types]);
 @endsection
