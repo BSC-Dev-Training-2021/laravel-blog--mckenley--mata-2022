@@ -38,12 +38,13 @@
                         <div class="card mb-2">
                             
                             <div class="card-body">
-                                <form method="get">
+                                <form method="get" action="{{url('updateCategory')">
 
                                     @foreach($cat_types as $values)
                                     <li class="list-group-item">                                       
                                         {{ $values->name }}
                                         <input type="hidden" name="cat_id" value="{{ $values->id }}">
+                                        <input type="hidden" name="cat_name" value="{{ $values->name }}">
                                         <button type="submit" class="btn btn-warning float-right" name="update-btn">Update</button>
                                         <button type="submit" class="btn btn-danger float-right" name="btn-delete">Delete</button>
                                     </li>

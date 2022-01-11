@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('content')
 <!-- Page content-->
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-8">
@@ -31,7 +32,7 @@
                 <div class="card bg-light">
                     <div class="card-body">
                         <!-- Comment form-->
-                        <form class="mb4" method="post" action="{{url('addcomment')}}">
+                        <form class="mb4" method="get" action="{{url('add') }}">
                             @csrf
                             <div>
                                 <input type="hidden" name="blog_id" value="{{ $blog_post->id }}">
@@ -41,14 +42,14 @@
                                 <button type="submit" class="btn btn-primary">Post Comment</button>
                             </div>
                         </form>
-                        
+
                         @foreach($comments as $values)
                         <!-- Single comment-->
                         <div class="d-flex">
                             <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                             <div class="ms-3">
-                                <div class="fw-bold"></div>
-                                
+                                <div class="fw-bold">{{ $values->user_id }}</div>
+                                {{ $values->comment }}
                             </div>
                         </div>
                         @endforeach

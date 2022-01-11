@@ -26,6 +26,9 @@ class CategoryTypesController extends Controller
         }
 
     }
+    public function updateCategory(Request $request){
+        
+    }
 
     
     

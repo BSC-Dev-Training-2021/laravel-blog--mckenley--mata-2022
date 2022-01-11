@@ -10,7 +10,9 @@ class ArticleController extends Controller
 { 
     public function InnerJoinGet($id){
         $blog_post = ArticleModel::find($id); // show blogpsot
-       
+
+        $comments = CommentModel::where('blog_post_id', $id)->get();// show comments
+
         $cat_types = DB::table('category_types') //show the selected categories on that blogpost
             ->select('name')
             ->leftjoin('blog_post_categories', 'blog_post_categories.category_id', '=', 'category_types.id')
@@ -18,7 +20,6 @@ class ArticleController extends Controller
             ->where('blog_post.id', $id)
             ->get();
 
-        return view('blog.article', ['category' => $cat_types], ['blog_post' => $blog_post]);
+        return view('blog.article', ['category' => $cat_types, 'blog_post' => $blog_post, 'comments'=> $comments]);
     }
-
 }

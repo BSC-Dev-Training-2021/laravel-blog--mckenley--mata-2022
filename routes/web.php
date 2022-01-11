@@ -9,9 +9,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\WidgetsController;
 use App\Http\Controllers\CommentsController;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,20 +20,17 @@ use App\Http\Controllers\CommentsController;
 |
 */
 
+Route::get('/', [IndexController::class, 'findAll_blogpost'] )->name('index');
 
+Route::get('/{id}', [IndexController::class, 'filterblog'] );
 
-
-Route::get('/', [indexController::class, 'findAll_blogpost'] )->name('index');
-
-Route::get('article/{id}', [ArticleController::class, 'InnerJoinGet'])->name('article');
+Route::get('article/{isd}', [ArticleController::class, 'InnerJoinGet'])->name('article');
 
 Route::get('add', [PostController::class, 'add']); //add post
 
 Route::get('add', [CategoryTypesController::class, 'addCategory']); //add Categories
 
-Route::post('addcomment', [CommentsController::class, 'addComments']); //add comment
-
-Route::get('/article/{id}', [CommentsController::class, 'showComment']); 
+Route::get('add', [CommentsController::class, 'addComments']); //add comment
 
 
 Route::get('post', function(){
