@@ -8,7 +8,7 @@ use App\Http\Controllers\CategoryTypesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\WidgetsController;
 use App\Http\Controllers\CommentsController;
-
+use App\Http\Controllers\MainController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +20,12 @@ use App\Http\Controllers\CommentsController;
 |
 */
 
+
+
 Route::get('/', [IndexController::class, 'findAll_blogpost'] )->name('index');
 
 Route::get('/index/{id}', [IndexController::class, 'filterblog']);
+
 
 Route::get('/index/article/{id}', [ArticleController::class, 'InnerJoinGet'])->name('article');
 
@@ -34,6 +37,10 @@ Route::get('add', [CommentsController::class, 'addComments']); //add comment
 
 Route::get('/delete/{id}', [CategoryTypesController::class, 'deleteCategory']);
 
+
+Route::get('login', function(){
+    return view('auth.login');
+})->name('login');
 
 
 
@@ -57,3 +64,15 @@ Route::get('message', function(){
     return view('blog.message');
 })->name('message');
 
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

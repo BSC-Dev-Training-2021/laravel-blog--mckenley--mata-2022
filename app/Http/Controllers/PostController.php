@@ -29,7 +29,7 @@ class PostController extends Controller
 		    $image_path = "/image/" . $imagename;
 		}
 
-    	$blog_post_query = DB::table('blog_post')->insert([ //data to be save
+    	$blog_post_query = DB::table('blog_post')->insertGetId([ //save to blogpost table
     		'title' => $request->input('title'),
     		'description' => $request->input('description'),
     		'content' => $request->input('content'),
@@ -37,8 +37,16 @@ class PostController extends Controller
     		'created_by' => 1
     	]);
 
+    	foreach($request->input('cb_category') as $values){ //save to blogpostcategory
+    		DB::table('blog_post_categories')->insert([
+    			'blog_post_id' => $blog_post_query,
+    			'category_id' => $values
+    		]);
+    	}
+
     	if($blog_post_query){
-    		return back()->with('success','Data have been save');
+    		return back()->with('success', 'Blogpost has been publish');
+    		
     	}else{
     		return back()->with('fail', 'Something went wrong');
     	}

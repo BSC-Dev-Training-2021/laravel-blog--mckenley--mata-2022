@@ -14,15 +14,16 @@ class CategoryTypesController extends Controller
             'add_cat' => 'required'
         ]);
 
-        $add_cat_query = DB::table('category_types')->insert([
-            'name' => $request->input('add_cat')
-        ]);
-        
-        if($add_cat_query){
-            return back()->with('success','Category have been save');
+        if(DB::table('category_types')->where('name',$request->input('add_cat'))->exists()){
+            return back()->with('fail', 'Category is already existed');
         }else{
-            return back()->with('fail', 'Something went wrong');
+            $add_cat_query = DB::table('category_types')->insert([
+            'name' => $request->input('add_cat')
+            ]);
+            return back()->with('success', 'Successfully added');
         }
+
+        
     }
 
     public function updateCategory(Request $request){
@@ -32,7 +33,7 @@ class CategoryTypesController extends Controller
     public function deleteCategory($id){ //delete category
         //check 1st if the selected category is existing before delete
         if(DB::table('blog_post_categories')->where('category_id', $id)->exists()){
-            echo "exists";
+            return back()->with('fail','The selected category is has a blogpost.');
         }else{
             $cat_type = CategoryTypesModel::find($id);
             $cat_type->delete();

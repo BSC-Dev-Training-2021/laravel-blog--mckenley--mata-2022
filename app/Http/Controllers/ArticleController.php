@@ -11,7 +11,12 @@ class ArticleController extends Controller
     public function InnerJoinGet($id){
         $blog_post = ArticleModel::find($id); // show blogpsot
 
-        $comments = CommentModel::where('blog_post_id', $id)->get();// show comments
+        $comments = DB::table('blog_post_comments')
+        ->select('*')
+        ->join('users', 'users.id', '=', 'blog_post_comments.user_id')
+        ->join('blog_post', 'blog_post.id', '=', 'blog_post_comments.blog_post_id')
+        ->where('blog_post_comments.blog_post_id', $id)
+        ->get();
 
         $cat_types = DB::table('category_types') //show the selected categories on that blogpost
             ->select('name')
