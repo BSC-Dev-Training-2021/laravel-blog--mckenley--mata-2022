@@ -22,15 +22,19 @@ use App\Http\Controllers\CommentsController;
 
 Route::get('/', [IndexController::class, 'findAll_blogpost'] )->name('index');
 
-Route::get('/{id}', [IndexController::class, 'filterblog'] );
+Route::get('/index/{id}', [IndexController::class, 'filterblog']);
 
-Route::get('article/{isd}', [ArticleController::class, 'InnerJoinGet'])->name('article');
+Route::get('/index/article/{id}', [ArticleController::class, 'InnerJoinGet'])->name('article');
 
-Route::get('add', [PostController::class, 'add']); //add post
+Route::post('addPost', [PostController::class, 'addPost']); //add post
 
-Route::get('add', [CategoryTypesController::class, 'addCategory']); //add Categories
+Route::post('add', [CategoryTypesController::class, 'addCategory']); //add Categories
 
 Route::get('add', [CommentsController::class, 'addComments']); //add comment
+
+Route::get('/delete/{id}', [CategoryTypesController::class, 'deleteCategory']);
+
+
 
 
 Route::get('post', function(){

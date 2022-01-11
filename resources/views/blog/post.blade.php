@@ -25,7 +25,7 @@
                                     {{ Session::get('fail') }}
                             </div>
                         @endif
-                        <form action="add" method="get" enctype="multipart/form-data">
+                        <form action="addPost" method="post" enctype="multipart/form-data">
                             @csrf
                                     <div class="form-group">
                                         <input type="hidden" name="user" value="1">

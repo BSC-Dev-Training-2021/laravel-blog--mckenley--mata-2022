@@ -20,7 +20,7 @@
                             @foreach($cat_types as $values)
                             <div class="col-sm-6">
                                 <ul class="list-unstyled mb-0">
-                                    <li><a href="{{ url($values->id) }}">{{ $values->name }}</a></li>
+                                    <li><a href="{{ url('index/'.$values->id) }}">{{ $values->name }}</a></li>
                                 </ul>
                             </div>
                             @endforeach

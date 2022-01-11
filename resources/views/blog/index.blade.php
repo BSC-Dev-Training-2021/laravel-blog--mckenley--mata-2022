@@ -27,7 +27,7 @@
                                 <h2 class="card-title">{{ $value->title }}</h2>
                                 <p class="card-text">{{ $value->description }}</p>
                                 <form method="post">
-                                    <a class="btn btn-primary" href="article/{{ $value->id }}">Read more →</a>
+                                    <a class="btn btn-primary" href="index/article/{{ $value->id }}">Read more →</a>
                                 </form>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                                     <div class="small text-muted">{{ $value->date_created }}</div>
                                     <h2 class="card-title h4">{{ $value->title}}</h2>
                                     <p class="card-text">{{ $value->description}}</p>
-                                    <a class="btn btn-primary" href="article/{{ $value->id }}">Read more →</a>
+                                    <a class="btn btn-primary" href="/index/article/{{ $value->id }}">Read more →</a>
                                 </div>
                             </div>
                             <!-- Blog post-->

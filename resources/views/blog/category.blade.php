@@ -24,7 +24,7 @@
                                     {{ Session::get('fail') }}
                             </div>
                         @endif
-                        <form method="get" action="add">
+                        <form method="post" action="add">
                         @csrf
                             <div class="input-group">
                                 <input class="form-control" type="text" placeholder="Insert your category here." aria-label="Enter search term..." aria-describedby="button-search" name="add_cat" required  />
@@ -34,22 +34,26 @@
                     </div>
                     <!-- Submitted messages -->
                     <section>
-                        
+                        @if(session()->has('message'))
+                        <div class="alert alert-info">
+                        {{ session('message') }}
+                        </div>
+                        @endif
                         <div class="card mb-2">
                             
                             <div class="card-body">
-                                <form method="get" action="{{url('updateCategory')">
-
-                                    @foreach($cat_types as $values)
+                                @foreach($cat_types as $values)
+                                
+                                    
                                     <li class="list-group-item">                                       
                                         {{ $values->name }}
                                         <input type="hidden" name="cat_id" value="{{ $values->id }}">
                                         <input type="hidden" name="cat_name" value="{{ $values->name }}">
-                                        <button type="submit" class="btn btn-warning float-right" name="update-btn">Update</button>
-                                        <button type="submit" class="btn btn-danger float-right" name="btn-delete">Delete</button>
+                                        <a href="{{url('/update/'.$values->id) }}" class="btn btn-warning" role="button">UPDATE</a>
+                                        <a href="{{url('/delete/'.$values->id) }}" class="btn btn-danger" role="button">DELETE</a>
                                     </li>
-                                    @endforeach
-                                </form>  
+                                
+                                @endforeach  
                             </div>
                             
                         </div>

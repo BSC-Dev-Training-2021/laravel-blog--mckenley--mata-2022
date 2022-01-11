@@ -13,7 +13,7 @@ class PostController extends Controller
 		return view('blog.post');
 	}
 
-    public function add(Request $request){ // post data to database
+    public function addPost(Request $request){ // post data to database
     	$request->validate([
     		'title' => 'required',
     		'description' => 'required',
@@ -36,17 +36,6 @@ class PostController extends Controller
     		'img_link' => $image_path,
     		'created_by' => 1
     	]);
-
-    	$category = $request->input('cb_category');
-
-    	if (isset($blog_post_query)){ 
-    		foreach($category as $values){
-    			DB::table('blog_post_categories')->insert([
-    				'category_id' => $values,
-    				'blog_post_id' => $blog_post_query->id
-    			]);
-    		}
-    	}
 
     	if($blog_post_query){
     		return back()->with('success','Data have been save');

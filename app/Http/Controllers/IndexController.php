@@ -7,13 +7,13 @@ use App\Models\IndexModel;
 use Illuminate\Support\Facades\DB;
 class IndexController extends Controller
 {
-    public function findAll_blogpost()
+    public function findAll_blogpost() //select all blogpost
     {
         
         $blog_post = IndexModel::all();
         return view('blog.index', ['blog_post' =>$blog_post]);
     }
-    public function filterblog($id){
+    public function filterblog($id){ // filter the selected category on widgets
 
         $blog_post = DB::table('blog_post') //show the selected categories on that blogpost
             ->select('*')
