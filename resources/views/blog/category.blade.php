@@ -14,7 +14,18 @@
                     </header>
                     <!-- Post content-->
                     <div class="card mb-4">
-                        <form method="post" action="{{route('category') }}">
+                            @if(Session::get('success'))
+                            <div class="alert alert-success">
+                                    {{ Session::get('success') }}
+                            </div>
+                        @endif
+                        @if(Session::get('fail'))
+                            <div class="alert alert-success">
+                                    {{ Session::get('fail') }}
+                            </div>
+                        @endif
+                        <form method="get" action="add">
+                        @csrf
                             <div class="input-group">
                                 <input class="form-control" type="text" placeholder="Insert your category here." aria-label="Enter search term..." aria-describedby="button-search" name="add_cat" required  />
                                 <button class="btn btn-primary" id="button-search" type="submit" name="btn_add_cat">Add Category</button>
@@ -23,10 +34,12 @@
                     </div>
                     <!-- Submitted messages -->
                     <section>
+                        
                         <div class="card mb-2">
                             
                             <div class="card-body">
                                 <form method="get">
+
                                     @foreach($cat_types as $values)
                                     <li class="list-group-item">                                       
                                         {{ $values->name }}

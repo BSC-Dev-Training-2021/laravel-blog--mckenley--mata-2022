@@ -13,14 +13,14 @@ class PostController extends Controller
 		return view('blog.post');
 	}
 
-    public function add(Request $request){
+    public function add(Request $request){ // post data to database
     	$request->validate([
     		'title' => 'required',
     		'description' => 'required',
     		'content' => 'required'
     	]);
 
-    	if($request->hasFile('image')){
+    	if($request->hasFile('image')){ // images save
 		    $image = $request->file('image');
 		    $image_name = $image->getClientOriginalName();
 		    $imagename = $image_name;
@@ -29,7 +29,7 @@ class PostController extends Controller
 		    $image_path = "/image/" . $imagename;
 		}
 
-    	$blog_post_query = DB::table('blog_post')->insert([
+    	$blog_post_query = DB::table('blog_post')->insert([ //data to be save
     		'title' => $request->input('title'),
     		'description' => $request->input('description'),
     		'content' => $request->input('content'),
@@ -39,7 +39,7 @@ class PostController extends Controller
 
     	$category = $request->input('cb_category');
 
-    	if (isset($blog_post_query)){
+    	if (isset($blog_post_query)){ 
     		foreach($category as $values){
     			DB::table('blog_post_categories')->insert([
     				'category_id' => $values,

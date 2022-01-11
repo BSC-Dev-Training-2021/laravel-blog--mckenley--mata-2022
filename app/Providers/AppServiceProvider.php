@@ -22,8 +22,8 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
-        \View::composer(['partials/widgets','blog/category'], function ($view) {
+    {   // show the all the categories and post to selected pages
+        \View::composer(['partials/widgets','blog/category', 'blog/post'], function ($view) {  
         $cat_types = DB::table('category_types')->get();
         $view->with(['cat_types'=>$cat_types]);
     });

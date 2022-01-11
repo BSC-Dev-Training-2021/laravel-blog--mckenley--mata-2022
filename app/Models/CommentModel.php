@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class WidgetsModel extends Model
+class CommentModel extends Model
 {
     use HasFactory;
-    protected $table = 'category_types';
+    protected $table = 'blog_post_comments';
 }

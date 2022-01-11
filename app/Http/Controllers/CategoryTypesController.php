@@ -4,15 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CategoryTypesModel;
+use Illuminate\Support\Facades\DB;
 
 class CategoryTypesController extends Controller
 {
-    public function findAll()
-    {
-        $category_types = CategoryTypesModel::all();
-        return view('blog.post', ['category_types' => $category_types]);
-        
+    
+    public function addCategory(Request $request){ //adding categories
+        $request->validate([
+            'add_cat' => 'required'
+        ]);
+
+        $add_cat_query = DB::table('category_types')->insert([
+            'name' => $request->input('add_cat')
+            
+        ]);
+
+        if($add_cat_query){
+            return back()->with('success','Category have been save');
+        }else{
+            return back()->with('fail', 'Something went wrong');
+        }
+
     }
+
     
     
 }

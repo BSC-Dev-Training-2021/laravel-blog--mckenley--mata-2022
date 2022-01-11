@@ -44,20 +44,15 @@
                                         <span style="color:red">@error('content') {{$message}} @enderror</span>
                                     </div>
                                     <div class="form-group">
-                                        
                                             <input class="form-control mb-1" type="file" name="image" id="file" accept="image/x-png,image/gif,image/jpeg" >
-                                            
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1 mt-3">Categories</label>
                                         <div class="row">
-                                           
-                                            
-                                            @foreach ($category_types as $value) 
-                                               
+                                            @foreach ($cat_types as $value) 
                                             <div class="col-lg-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="{{ $value->id }}" id="checkbox{{$value->id}}" name="checkbox[]">
+                                                    <input class="form-check-input" type="checkbox" value="{{ $value->id }}" id="checkbox{{$value->id}}" name="cb_category[]">
 
                                                     <label class="form-check-label" for="checkbox{{$value->id}}">
                                                       {{ $value->name }}
@@ -67,7 +62,6 @@
                                             @endforeach
                                         </div>
                                     </div>
-
                                     <button type="submit" class="btn btn-primary mt-5" name="submit">Post</button>
                                 </form>
                     </section>
@@ -75,5 +69,4 @@
                 <div class="col-lg-4"></div>
             </div>
         </div>
-       
 @endsection

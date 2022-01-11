@@ -7,6 +7,10 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryTypesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\WidgetsController;
+use App\Http\Controllers\CommentsController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,14 +28,20 @@ use App\Http\Controllers\WidgetsController;
 
 Route::get('/', [indexController::class, 'findAll_blogpost'] )->name('index');
 
-Route::get('article/{id}', [ArticleController::class, 'findId'])->name('article');
+Route::get('article/{id}', [ArticleController::class, 'InnerJoinGet'])->name('article');
 
-Route::get('post', [CategoryTypesController::class, 'findAll'])->name('post');
+Route::get('add', [PostController::class, 'add']); //add post
 
-Route::get('add', [PostController::class, 'add']);
+Route::get('add', [CategoryTypesController::class, 'addCategory']); //add Categories
+
+Route::post('addcomment', [CommentsController::class, 'addComments']); //add comment
+
+Route::get('/article/{id}', [CommentsController::class, 'showComment']); 
 
 
-
+Route::get('post', function(){
+    return view('blog.post');
+})->name('post');
 
 Route::get('category', function(){
     return view('blog.category');
