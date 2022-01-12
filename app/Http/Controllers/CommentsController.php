@@ -20,11 +20,7 @@ class CommentsController extends Controller
             'blog_post_id' => $request->input('blog_id')  
         ]);
         
-        if($add_comment){
-            return back()->with('success','Data have been save');
-        }else{
-            return back()->with('fail', 'Something went wrong');
-        }
+        
     }
 
 

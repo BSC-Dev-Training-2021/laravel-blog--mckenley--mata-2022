@@ -26,8 +26,19 @@ class CategoryTypesController extends Controller
         
     }
 
-    public function updateCategory(Request $request){
-        
+    public function update($id){ // function where show the form on category.blade.php
+        $cat = CategoryTypesModel::find($id); // show blogpsot
+        return view('blog.category', ['cat'=>$cat]);
+    }
+
+    public function updateCategory(Request $request){ // update the record on database
+        $cat = $request->input('update_cat');
+        $id = $request->input('cat_id');
+        $date = now();
+        $updated_cat = CategoryTypesModel::where('id', $id)->update([
+            'name'=> $cat
+        ]);
+        return view('blog.category');
     }
 
     public function deleteCategory($id){ //delete category

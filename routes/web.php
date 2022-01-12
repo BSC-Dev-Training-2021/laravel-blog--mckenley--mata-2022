@@ -26,7 +26,6 @@ Route::get('/', [IndexController::class, 'findAll_blogpost'] )->name('index');
 
 Route::get('/index/{id}', [IndexController::class, 'filterblog']);
 
-
 Route::get('/index/article/{id}', [ArticleController::class, 'InnerJoinGet'])->name('article');
 
 Route::post('addPost', [PostController::class, 'addPost']); //add post
@@ -37,12 +36,13 @@ Route::get('add', [CommentsController::class, 'addComments']); //add comment
 
 Route::get('/delete/{id}', [CategoryTypesController::class, 'deleteCategory']);
 
+Route::get('/update/{id}', [CategoryTypesController::class, 'update']);
+
+Route::post('update', [CategoryTypesController::class, 'updateCategory']);
 
 Route::get('login', function(){
     return view('auth.login');
 })->name('login');
-
-
 
 Route::get('post', function(){
     return view('blog.post');
@@ -65,14 +65,3 @@ Route::get('message', function(){
 })->name('message');
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

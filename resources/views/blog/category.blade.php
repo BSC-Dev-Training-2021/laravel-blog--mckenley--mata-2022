@@ -39,27 +39,42 @@
                         {{ session('message') }}
                         </div>
                         @endif
+                        @if(isset($cat))
+                            @if(session()->has('message'))
+                                sgfdfdg
+                            @else
+                                <form method="post" action="{{url('update')}}">
+                                @csrf
+                                    <div class="input-group">
+                                    <input class="form-control" type="text" aria-label="Enter search term..." aria-describedby="button-search" name="update_cat" value="{{ $cat->name }}" required  />
+                                    <input type="hidden" name="cat_id" value="{{ $cat->id }}">
+                                    <button class="btn btn-info" id="button-search" type="submit" name="btn_update_cat">Update</button>
+                                    </div>
+                                </form>
+                            @endif
+                            
+                        @endif
                         <div class="card mb-2">
                             
                             <div class="card-body">
-                                @foreach($cat_types as $values)
-                                
-                                    
+                                @foreach($cat_types as $values) 
                                     <li class="list-group-item">                                       
                                         {{ $values->name }}
                                         <input type="hidden" name="cat_id" value="{{ $values->id }}">
                                         <input type="hidden" name="cat_name" value="{{ $values->name }}">
+                                        
                                         <a href="{{url('/update/'.$values->id) }}" class="btn btn-warning" role="button">UPDATE</a>
+
                                         <a href="{{url('/delete/'.$values->id) }}" class="btn btn-danger" role="button">DELETE</a>
                                     </li>
-                                
                                 @endforeach  
+                             
                             </div>
-                            
-                        </div>
-                    </section>
-                </div>
+                        </section>
+                    </div>
                 <div class="col-lg-4"></div>
             </div>
         </div>
+
+
 @endsection            
